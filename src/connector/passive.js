@@ -39,7 +39,6 @@ class Passive extends Connector {
         if (!ip.isEqual(this.connection.commandSocket.remoteAddress, socket.remoteAddress)) {
 
           this.log.warn('DIRECT CONNECTION with client established', {
-            ip,
             connectionAddress: this.connection.commandSocket.remoteAddress,
             remoteAddress: socket.remoteAddress,
           });
