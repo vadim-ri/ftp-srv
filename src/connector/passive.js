@@ -38,7 +38,7 @@ class Passive extends Connector {
       const connectionHandler = socket => {
         if (!ip.isEqual(this.connection.commandSocket.remoteAddress, socket.remoteAddress)) {
 
-          this.log.info('DIRECT CONNECTION with client established', {
+          this.log.warn('DIRECT CONNECTION with client established', {
             ip,
             connectionAddress: this.connection.commandSocket.remoteAddress,
             remoteAddress: socket.remoteAddress,
