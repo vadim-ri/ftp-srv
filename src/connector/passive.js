@@ -37,14 +37,20 @@ class Passive extends Connector {
     .then(port => {
       const connectionHandler = socket => {
         if (!ip.isEqual(this.connection.commandSocket.remoteAddress, socket.remoteAddress)) {
-          this.log.error({
-            pasv_connection: socket.remoteAddress,
-            cmd_connection: this.connection.commandSocket.remoteAddress
-          }, 'Connecting addresses do not match');
 
-          socket.destroy();
-          return this.connection.reply(550, 'Remote addresses do not match')
-          .finally(() => this.connection.close());
+          this.log.info('DIRECT CONNECTION with client established', {
+            ip,
+            connectionAddress: this.connection.commandSocket.remoteAddress,
+            remoteAddress: socket.remoteAddress,
+          });
+          // this.log.error({
+          //   pasv_connection: socket.remoteAddress,
+          //   cmd_connection: this.connection.commandSocket.remoteAddress
+          // }, 'Connecting addresses do not match');
+          //
+          // socket.destroy();
+          // return this.connection.reply(550, 'Remote addresses do not match')
+          // .finally(() => this.connection.close());
         }
         this.log.trace({port, remoteAddress: socket.remoteAddress}, 'Passive connection fulfilled.');
 
